@@ -51,6 +51,7 @@ class DemoSeeder extends Seeder
     {
         ChurchInfo::updateOrCreate(['id' => 1], [
             'name' => 'Hội Thánh Tin Lành Ân Điển',
+            'founding_date' => '1998-03-15',
             'vision' => 'Trở thành một cộng đồng đức tin yêu thương, gắn kết và phát triển bền vững.',
             'mission' => 'Rao truyền Phúc Âm, gây dựng môn đồ, và phục vụ cộng đồng bằng tình yêu thương.',
             'history' => 'Hội Thánh được thành lập năm 1998, khởi đầu với 20 thành viên và phát triển đến ngày nay.',

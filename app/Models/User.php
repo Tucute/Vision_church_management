@@ -25,10 +25,20 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(Person::class);
     }
 
-    // Chỉ admin/approver được vào Filament admin panel
+    // Phân quyền theo từng panel: Admin panel chỉ dành cho staff,
+    // Community panel dành cho mọi tài khoản đang active (kể cả admin/approver
+    // vì họ cũng là giáo dân, có thể muốn dùng tính năng cộng đồng như Member).
     public function canAccessPanel(Panel $panel): bool
     {
-        return in_array($this->role, ['admin', 'approver']) && $this->status === 'active';
+        if ($this->status !== 'active') {
+            return false;
+        }
+
+        return match ($panel->getId()) {
+            'admin' => in_array($this->role, ['admin', 'approver']),
+            'community' => true,
+            default => false,
+        };
     }
 
     public function isAdmin(): bool

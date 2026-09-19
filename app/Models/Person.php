@@ -52,6 +52,23 @@ class Person extends Model
         return $this->hasOne(Contributor::class);
     }
 
+    public function smallGroupMemberships()
+    {
+        return $this->hasMany(SmallGroupMembership::class);
+    }
+
+    public function smallGroups()
+    {
+        return $this->belongsToMany(SmallGroup::class, 'small_group_memberships')
+            ->withPivot(['joined_date', 'left_date'])
+            ->withTimestamps();
+    }
+
+    public function prayerRequests()
+    {
+        return $this->hasMany(PrayerRequest::class);
+    }
+
     public function user()
     {
         return $this->hasOne(User::class);

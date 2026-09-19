@@ -4,7 +4,12 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-extrabold mb-10">Về {{ $churchInfo->name }}</h1>
+    <h1 class="text-3xl font-extrabold mb-2">Về {{ $churchInfo->name }}</h1>
+    @if ($churchInfo->founding_date)
+        <p class="text-sm text-slate-500 mb-10">Thành lập ngày {{ $churchInfo->founding_date->format('d/m/Y') }}</p>
+    @else
+        <div class="mb-10"></div>
+    @endif
 
     <div class="space-y-10">
         <div>

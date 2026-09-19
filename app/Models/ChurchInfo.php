@@ -8,9 +8,10 @@ class ChurchInfo extends Model
 {
     protected $table = 'church_info';
 
-    protected $fillable = ['name', 'vision', 'mission', 'history', 'contact_info', 'social_links', 'address'];
+    protected $fillable = ['name', 'founding_date', 'vision', 'mission', 'history', 'contact_info', 'social_links', 'address'];
 
     protected $casts = [
+        'founding_date' => 'date',
         'contact_info' => 'array',
         'social_links' => 'array',
     ];
