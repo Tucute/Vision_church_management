@@ -1,76 +1,175 @@
-@extends('layouts.public')
+@extends('layouts.public', ['churchInfo' => $churchInfo])
 
 @section('title', $churchInfo->name . ' — Trang chủ')
 
 @section('content')
 
-    {{-- Hero --}}
-    <section class="bg-gradient-to-b from-indigo-50 to-white">
-        <div class="max-w-5xl mx-auto px-4 py-20 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
-                Chào mừng đến với {{ $churchInfo->name }}
-            </h1>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                {{ $churchInfo->mission ?? 'Một cộng đồng đức tin yêu thương, gắn kết và cùng nhau phát triển.' }}
-            </p>
-            <div class="flex items-center justify-center gap-4">
-                <a href="{{ route('im-new') }}" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700">
-                    Tôi là người mới →
-                </a>
-                <a href="{{ route('events.index') }}" class="border border-slate-300 font-semibold px-6 py-3 rounded-lg hover:bg-slate-50">
-                    Xem sự kiện
-                </a>
+    <x-public.home-hero :church-info="$churchInfo" />
+
+    <section class="ui-section" aria-labelledby="home-intro-heading">
+        <x-public.container>
+            <x-public.reveal>
+                <x-public.section-header
+                    title="Chúng tôi là ai"
+                    heading-id="home-intro-heading"
+                    action-label="Đọc thêm"
+                    :action-url="route('about')"
+                />
+            </x-public.reveal>
+
+            <div class="grid gap-6 lg:grid-cols-2">
+                <x-public.reveal delay="1">
+                    <x-public.info-card title="Tầm nhìn" eyebrow="Vision">
+                        <p class="ui-body">
+                            {{ $churchInfo->vision ?: 'Đang cập nhật.' }}
+                        </p>
+                    </x-public.info-card>
+                </x-public.reveal>
+
+                <x-public.reveal delay="2">
+                    <x-public.info-card title="Sứ mệnh" eyebrow="Mission">
+                        <p class="ui-body">
+                            {{ $churchInfo->mission ?: 'Đang cập nhật.' }}
+                        </p>
+                    </x-public.info-card>
+                </x-public.reveal>
             </div>
-        </div>
+
+            @if ($churchInfo->history || $churchInfo->founding_date)
+                <x-public.reveal delay="3" class="mt-6">
+                    <x-public.info-card>
+                        @if ($churchInfo->founding_date)
+                            <p class="ui-eyebrow mb-2">
+                                Thành lập {{ $churchInfo->founding_date->format('d/m/Y') }}
+                            </p>
+                        @endif
+                        @if ($churchInfo->history)
+                            <p class="ui-body line-clamp-3">
+                                {{ $churchInfo->history }}
+                            </p>
+                        @endif
+                        <div class="mt-4">
+                            <x-public.button variant="link" :href="route('about')">
+                                Đọc lịch sử đầy đủ
+                                <x-public.icon name="arrow-right" />
+                            </x-public.button>
+                        </div>
+                    </x-public.info-card>
+                </x-public.reveal>
+            @endif
+        </x-public.container>
     </section>
 
-    {{-- Upcoming Events --}}
-    @if ($upcomingEvents->isNotEmpty())
-    <section class="max-w-6xl mx-auto px-4 py-16">
-        <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-bold">Sự kiện sắp tới</h2>
-            <a href="{{ route('events.index') }}" class="text-indigo-600 font-medium text-sm hover:underline">Xem tất cả →</a>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-            @foreach ($upcomingEvents as $event)
-                <a href="{{ route('events.show', $event) }}" class="block border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
-                    <div class="text-indigo-600 text-sm font-semibold mb-1">{{ $event->start_date->format('d/m/Y') }}</div>
-                    <div class="font-bold text-lg mb-2">{{ $event->name }}</div>
-                    <div class="text-sm text-slate-500">{{ $event->location }}</div>
-                </a>
-            @endforeach
-        </div>
-    </section>
-    @endif
+    <section class="border-y border-border bg-surface-alt ui-section" aria-labelledby="home-visit-heading">
+        <x-public.container>
+            <div class="grid items-start gap-8 lg:grid-cols-2">
+                <x-public.reveal>
+                    <x-public.section-header
+                        title="Ghé thăm chúng tôi"
+                        heading-id="home-visit-heading"
+                        class="mb-4 sm:mb-6"
+                    />
+                    <p class="ui-muted max-w-lg">
+                        Chúng tôi rất vui được chào đón bạn. Dưới đây là thông tin liên hệ hiện có — hãy xem thêm sự kiện sắp tới để biết lịch họp mặt.
+                    </p>
+                    <div class="mt-6">
+                        <x-public.button variant="secondary" :href="route('contact')">
+                            Liên hệ
+                            <x-public.icon name="arrow-right" />
+                        </x-public.button>
+                    </div>
+                </x-public.reveal>
 
-    {{-- Ministries --}}
-    @if ($ministries->isNotEmpty())
-    <section class="bg-slate-50">
-        <div class="max-w-6xl mx-auto px-4 py-16">
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-bold">Các ban ngành</h2>
-                <a href="{{ route('ministries.index') }}" class="text-indigo-600 font-medium text-sm hover:underline">Xem tất cả →</a>
+                <x-public.reveal delay="1">
+                    <x-public.info-card eyebrow="Địa điểm & liên hệ">
+                        <x-public.contact-info :church-info="$churchInfo" />
+                    </x-public.info-card>
+                </x-public.reveal>
             </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                @foreach ($ministries as $ministry)
-                    <a href="{{ route('ministries.show', $ministry) }}" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
-                        <div class="font-bold text-lg mb-2">{{ $ministry->name }}</div>
-                        <p class="text-sm text-slate-500 line-clamp-2">{{ $ministry->description }}</p>
-                        <div class="text-xs text-indigo-600 font-medium mt-3">{{ $ministry->active_memberships_count }} thành viên</div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
+        </x-public.container>
     </section>
-    @endif
 
-    {{-- CTA --}}
-    <section class="max-w-4xl mx-auto px-4 py-20 text-center">
-        <h2 class="text-2xl font-bold mb-3">Lần đầu đến với chúng tôi?</h2>
-        <p class="text-slate-600 mb-6">Chúng tôi rất vui được chào đón bạn. Hãy để lại thông tin để Hội Thánh kết nối với bạn.</p>
-        <a href="{{ route('im-new') }}" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700">
-            Kết nối ngay
-        </a>
+    <section class="ui-section" aria-labelledby="home-events-heading">
+        <x-public.container>
+            <x-public.reveal>
+                <x-public.section-header
+                    title="Sự kiện sắp tới"
+                    heading-id="home-events-heading"
+                    action-label="Xem tất cả"
+                    :action-url="route('events.index')"
+                />
+            </x-public.reveal>
+
+            @if ($upcomingEvents->isNotEmpty())
+                <ul class="grid list-none grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($upcomingEvents as $event)
+                        <li>
+                            <x-public.reveal :delay="(string) min($loop->index + 1, 3)">
+                                <x-public.content-card
+                                    :href="route('events.show', $event)"
+                                    :title="$event->name"
+                                    :meta="$event->start_date->format('d/m/Y')"
+                                    :description="$event->location"
+                                />
+                            </x-public.reveal>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <x-public.reveal>
+                    <x-public.empty-state
+                        title="Chưa có sự kiện sắp tới"
+                        body="Hãy quay lại sau hoặc liên hệ Hội Thánh để biết lịch sắp tới."
+                        action-label="Liên hệ"
+                        :action-url="route('contact')"
+                    />
+                </x-public.reveal>
+            @endif
+        </x-public.container>
     </section>
+
+    <section class="border-y border-border bg-surface-alt ui-section" aria-labelledby="home-ministries-heading">
+        <x-public.container>
+            <x-public.reveal>
+                <x-public.section-header
+                    title="Các ban ngành"
+                    heading-id="home-ministries-heading"
+                    action-label="Xem tất cả"
+                    :action-url="route('ministries.index')"
+                />
+            </x-public.reveal>
+
+            @if ($ministries->isNotEmpty())
+                <ul class="grid list-none grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($ministries as $ministry)
+                        <li>
+                            <x-public.reveal :delay="(string) min(($loop->index % 3) + 1, 3)">
+                                <x-public.content-card
+                                    :href="route('ministries.show', $ministry)"
+                                    :title="$ministry->name"
+                                    :description="$ministry->description"
+                                    :footer="$ministry->active_memberships_count . ' thành viên'"
+                                />
+                            </x-public.reveal>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <x-public.reveal>
+                    <x-public.empty-state
+                        title="Chưa có ban ngành"
+                        body="Thông tin ban ngành sẽ sớm được cập nhật."
+                    />
+                </x-public.reveal>
+            @endif
+        </x-public.container>
+    </section>
+
+    <x-public.cta-band
+        title="Lần đầu đến với chúng tôi?"
+        body="Chúng tôi rất vui được chào đón bạn. Hãy để lại thông tin để Hội Thánh kết nối với bạn."
+        action-label="Kết nối ngay"
+        :action-url="route('im-new')"
+    />
 
 @endsection

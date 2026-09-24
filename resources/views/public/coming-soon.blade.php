@@ -3,10 +3,21 @@
 @section('title', $title)
 
 @section('content')
-<div class="max-w-3xl mx-auto px-4 py-24 text-center">
-    <div class="text-5xl mb-4">🚧</div>
-    <h1 class="text-2xl font-bold mb-2">{{ $title }}</h1>
-    <p class="text-slate-500">Trang này đang được xây dựng, sẽ sớm ra mắt!</p>
-    <a href="{{ route('home') }}" class="inline-block mt-6 text-indigo-600 font-medium hover:underline">← Về trang chủ</a>
-</div>
+<section class="ui-section">
+    <x-public.container width="reading">
+        <x-public.reveal>
+            <x-public.info-card class="mx-auto max-w-lg text-center shadow-md">
+                <x-public.page-header
+                    :title="$title"
+                    lead="Trang này đang được xây dựng và sẽ sớm ra mắt."
+                    class="mb-6 text-center [&_h1]:mx-auto [&_p]:mx-auto"
+                />
+                <x-public.button variant="secondary" :href="route('home')">
+                    <x-public.icon name="arrow-left" />
+                    Về trang chủ
+                </x-public.button>
+            </x-public.info-card>
+        </x-public.reveal>
+    </x-public.container>
+</section>
 @endsection

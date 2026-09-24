@@ -1,23 +1,39 @@
 @extends('layouts.public')
 
-@section('title', 'Ministries')
+@section('title', 'Ban ngành')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-extrabold mb-10">Các ban ngành</h1>
+<section class="ui-section">
+    <x-public.container>
+        <x-public.reveal>
+            <x-public.page-header title="Các ban ngành" />
+        </x-public.reveal>
 
-    @if ($ministries->isEmpty())
-        <p class="text-slate-500">Hiện chưa có ban ngành nào.</p>
-    @else
-        <div class="grid md:grid-cols-3 gap-6">
-            @foreach ($ministries as $ministry)
-                <a href="{{ route('ministries.show', $ministry) }}" class="block border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
-                    <div class="font-bold text-lg mb-2">{{ $ministry->name }}</div>
-                    <p class="text-sm text-slate-500 line-clamp-3 mb-3">{{ $ministry->description }}</p>
-                    <div class="text-xs text-indigo-600 font-medium">{{ $ministry->active_memberships_count }} thành viên đang phục vụ</div>
-                </a>
-            @endforeach
-        </div>
-    @endif
-</div>
+        @if ($ministries->isEmpty())
+            <x-public.reveal>
+                <x-public.empty-state
+                    title="Chưa có ban ngành"
+                    body="Thông tin ban ngành sẽ sớm được cập nhật."
+                    action-label="Về trang chủ"
+                    :action-url="route('home')"
+                />
+            </x-public.reveal>
+        @else
+            <ul class="grid list-none grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach ($ministries as $ministry)
+                    <li>
+                        <x-public.reveal :delay="(string) min(($loop->index % 3) + 1, 3)">
+                            <x-public.content-card
+                                :href="route('ministries.show', $ministry)"
+                                :title="$ministry->name"
+                                :description="$ministry->description"
+                                :footer="$ministry->active_memberships_count . ' thành viên đang phục vụ'"
+                            />
+                        </x-public.reveal>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    </x-public.container>
+</section>
 @endsection

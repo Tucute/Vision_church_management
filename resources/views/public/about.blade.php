@@ -1,36 +1,42 @@
 @extends('layouts.public')
 
-@section('title', 'About — ' . $churchInfo->name)
+@section('title', 'Giới thiệu — ' . $churchInfo->name)
 
 @section('content')
-<div class="max-w-4xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-extrabold mb-2">Về {{ $churchInfo->name }}</h1>
-    @if ($churchInfo->founding_date)
-        <p class="text-sm text-slate-500 mb-10">Thành lập ngày {{ $churchInfo->founding_date->format('d/m/Y') }}</p>
-    @else
-        <div class="mb-10"></div>
-    @endif
+<section class="ui-section">
+    <x-public.container width="reading">
+        <x-public.reveal>
+            <x-public.page-header
+                :title="'Về ' . $churchInfo->name"
+                :lead="$churchInfo->founding_date ? 'Thành lập ngày ' . $churchInfo->founding_date->format('d/m/Y') : null"
+            />
+        </x-public.reveal>
 
-    <div class="space-y-10">
-        <div>
-            <h2 class="text-xl font-bold text-indigo-700 mb-2">Tầm nhìn</h2>
-            <p class="text-slate-700 leading-relaxed">{{ $churchInfo->vision ?: 'Đang cập nhật.' }}</p>
-        </div>
+        <div class="space-y-6">
+            <x-public.reveal delay="1">
+                <x-public.info-card title="Tầm nhìn" eyebrow="Vision">
+                    <p class="ui-body">{{ $churchInfo->vision ?: 'Đang cập nhật.' }}</p>
+                </x-public.info-card>
+            </x-public.reveal>
 
-        <div>
-            <h2 class="text-xl font-bold text-indigo-700 mb-2">Sứ mệnh</h2>
-            <p class="text-slate-700 leading-relaxed">{{ $churchInfo->mission ?: 'Đang cập nhật.' }}</p>
-        </div>
+            <x-public.reveal delay="2">
+                <x-public.info-card title="Sứ mệnh" eyebrow="Mission">
+                    <p class="ui-body">{{ $churchInfo->mission ?: 'Đang cập nhật.' }}</p>
+                </x-public.info-card>
+            </x-public.reveal>
 
-        <div>
-            <h2 class="text-xl font-bold text-indigo-700 mb-2">Lịch sử hình thành</h2>
-            <p class="text-slate-700 leading-relaxed">{{ $churchInfo->history ?: 'Đang cập nhật.' }}</p>
-        </div>
+            <x-public.reveal delay="3">
+                <x-public.info-card title="Lịch sử hình thành" eyebrow="History">
+                    <p class="ui-body whitespace-pre-line">{{ $churchInfo->history ?: 'Đang cập nhật.' }}</p>
+                </x-public.info-card>
+            </x-public.reveal>
 
-        <div>
-            <h2 class="text-xl font-bold text-indigo-700 mb-2">Địa chỉ</h2>
-            <p class="text-slate-700 leading-relaxed">{{ $churchInfo->address ?: 'Đang cập nhật.' }}</p>
+            <x-public.reveal>
+                <x-public.info-card title="Địa chỉ" eyebrow="Visit">
+                    <p class="ui-body">{{ $churchInfo->address ?: 'Đang cập nhật.' }}</p>
+                </x-public.info-card>
+            </x-public.reveal>
         </div>
-    </div>
-</div>
+    </x-public.container>
+</section>
 @endsection

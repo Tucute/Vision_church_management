@@ -28,7 +28,7 @@ class CommunityPanelProvider extends PanelProvider
             ->login()
             ->brandName('Cộng đồng Hội Thánh')
             ->colors([
-                'primary' => Color::Emerald, // màu khác Admin panel (thường là Indigo) để dễ phân biệt bằng mắt
+                'primary' => Color::hex('#1A2744'),
             ])
             // Discovery path RIÊNG BIỆT với Admin panel (app/Filament/Resources)
             // để 2 panel không đọc nhầm resource của nhau.

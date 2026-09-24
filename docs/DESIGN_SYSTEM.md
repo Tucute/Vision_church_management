@@ -1,13 +1,13 @@
 # Design System — Hội Thánh Tin Lành Ân Điển  
-### Grace Evangelical Church · “Open Door Light”
+### Grace Evangelical Church · “Open Door Alive” (evolved from Open Door Light)
 
-**Version:** 2.0  
+**Version:** 2.1  
 **Status:** Approved and implemented on public UI  
 **Authority:** Visual source of truth for a unified church identity across all public pages (and Filament theming when applied)  
-**Creative basis:** [`.agents/ui/design-direction-v2.md`](../.agents/ui/design-direction-v2.md)  
+**Creative basis:** [`.agents/ui/design-direction-v2.md`](../.agents/ui/design-direction-v2.md) · evolved for richer color, elevation, and intentional motion  
 **Preserves:** Routes, content, CMS/data, business logic, APIs  
 
-**Goal:** Every page must feel like the same house of grace — warm, calm, trustworthy, gospel-centered — never like a SaaS product, startup landing page, or generic template.
+**Goal:** Every page must feel like the same house of grace — trustworthy and gospel-centered, with clearer depth, stronger accent, and living motion — never neon, purple glow, or generic SaaS chrome.
 
 ---
 
@@ -17,7 +17,7 @@
 2. **Brand first** — Church name is a hero-level signal, not a tiny nav label.  
 3. **Human sanctuary** — Photography, breath, and clear Word over decoration.  
 4. **Few variants** — Small palette, few button styles, few card patterns.  
-5. **Quiet craft** — No glassmorphism, purple gradients, neon, or trend tricks.  
+5. **Alive craft** — Depth via border + shadow, rich accent, CSS motion/3D accents — no glassmorphism, purple glow, or neon.  
 6. **Vietnamese-first** — UI chrome and reading type support Vietnamese well.  
 7. **Accessible by default** — Contrast, focus, labels, keyboard paths required.
 
@@ -27,24 +27,24 @@
 
 ### 1.1 Philosophy
 
-**Ink of the Word + warmth of the house + one brass note of reverence.**
+**Deep azure ink + blue-stone canvas + rich amber note of welcome.**
 
-Primary is deep hymnbook ink (trust, Word), not a bright marketing hue. Surfaces are warm plaster and paper. Accent brass is rare and ceremonial — never the main CTA fill.
+Primary is deep azure (trust, Word). Surfaces are clean white cards on a soft blue-stone page. Accent amber is used boldly for eyebrows, hero orbs, and ceremonial highlights — still never the primary CTA fill.
 
 ### 1.2 Core palette (keep small)
 
 | Token | CSS name | Hex | Purpose |
 |-------|----------|-----|---------|
-| **Primary** | `--color-primary` | `#1A2744` | Brand actions, primary buttons, key links, focus rings, active nav |
-| **Primary dark** | `--color-primary-dark` | `#121B30` | Primary hover/active, pressed states |
-| **Primary light** | `--color-primary-light` | `#E8ECF3` | Soft selected chips, soft focus washes, subtle highlights |
-| **Secondary** | `--color-secondary` | `#5C6470` | Secondary UI emphasis, icons at rest, supporting labels |
-| **Accent** | `--color-accent` | `#9A7B4F` | Ceremonial highlight only (special labels, thin ornaments) |
-| **Background** | `--color-background` | `#F3F1EC` | Page canvas / body background |
-| **Surface** | `--color-surface` | `#FFFDF8` | Cards, forms, sticky header, elevated panels |
-| **Text** | `--color-text` | `#1A2744` | Primary body and heading text (same family as Primary) |
-| **Muted text** | `--color-text-muted` | `#5C6470` | Meta, hints, captions, placeholders (placeholder may use `#7A8290`) |
-| **Border** | `--color-border` | `#C9C4B8` | Dividers, input/card strokes |
+| **Primary** | `--color-primary` | `#0F274F` | Brand actions, primary buttons, key links, focus rings, active nav |
+| **Primary dark** | `--color-primary-dark` | `#0A1C3A` | Primary hover/active, pressed states |
+| **Primary light** | `--color-primary-light` | `#E4EBF5` | Soft selected chips, soft focus washes, subtle highlights |
+| **Secondary** | `--color-secondary` | `#4A5568` | Secondary UI emphasis, icons at rest, supporting labels |
+| **Accent** | `--color-accent` | `#C9892E` | Eyebrows, icon washes, ceremonial highlight |
+| **Background** | `--color-background` | `#EEF2F7` | Page canvas / body background |
+| **Surface** | `--color-surface` | `#FFFFFF` | Cards, forms, sticky header, elevated panels |
+| **Text** | `--color-text` | `#0F274F` | Primary body and heading text (same family as Primary) |
+| **Muted text** | `--color-muted` | `#5A6578` | Meta, hints, captions, placeholders (placeholder may use `#7A8799`) |
+| **Border** | `--color-border` | `#C5CEDB` | Dividers, input/card strokes |
 | **Success** | `--color-success` | `#2F6A4A` | Success messages, “open registration” |
 | **Warning** | `--color-warning` | `#8A6A2F` | Caution, capacity full, pending |
 | **Error** | `--color-error` | `#8F2F2F` | Errors, destructive emphasis |
@@ -53,12 +53,12 @@ Primary is deep hymnbook ink (trust, Word), not a bright marketing hue. Surfaces
 
 | Token | Hex | Use |
 |-------|-----|-----|
-| **Surface alt** | `#E7E9E2` | Alternating section bands (olive-stone) |
-| **Accent soft** | `#EDE4D4` | Rare soft ceremonial band (invite strip) |
-| **Inverse** | `#141C2E` | Footer / dark sanctuary band |
-| **On primary** | `#FFFDF8` | Text/icons on primary-filled controls |
-| **On inverse** | `#FFFDF8` | Footer titles |
-| **On inverse muted** | `#A8B0BD` | Footer secondary text |
+| **Surface alt** | `#E2E8F0` | Alternating section bands |
+| **Accent soft** | `#F5E8D0` | Soft ceremonial / invite band |
+| **Inverse** | `#0A1628` | Footer / dark sanctuary band |
+| **On primary** | `#FFFFFF` | Text/icons on primary-filled controls |
+| **On inverse** | `#FFFFFF` | Footer titles |
+| **On inverse muted** | `#9AABC2` | Footer secondary text |
 
 ### 1.4 Soft status pairs (fixed)
 
@@ -67,16 +67,16 @@ Primary is deep hymnbook ink (trust, Word), not a bright marketing hue. Surfaces
 | Success soft | `#E3F0E8` | Success `#2F6A4A` |
 | Warning soft | `#F3ECDC` | Warning `#8A6A2F` |
 | Error soft | `#F5E4E4` | Error `#8F2F2F` |
-| Info soft | `#E4EAF1` | Primary / `#3A5A7A` |
+| Info soft | `#E0EAF4` | Info `#2A5A8A` |
 
 ### 1.5 Color rules
 
 | DO | DON’T |
 |----|-------|
 | Use Primary for CTAs and text links | Use Accent as a primary button fill |
-| Use Background + Surface for most UI | Introduce teal, purple, or terracotta brand colors |
-| Use Border for structure (not heavy shadows) | Rainbow status without text labels |
-| Keep Accent scarce | Gradient fills as brand identity |
+| Use Background + Surface for most UI | Introduce purple glow, neon, or terracotta-cream kits |
+| Pair Border + `shadow-sm` on resting cards | Rainbow status without text labels |
+| Use Accent boldly for eyebrows / hero accents | Gratuitous full-page gradient as brand identity |
 
 ### 1.6 Accessibility
 
@@ -394,10 +394,10 @@ Meaningful Vietnamese (or empty alt if pure decoration). Brand logo alt = church
 
 | Token | Value | Apply |
 |-------|-------|-------|
-| `radius-sm` | 4px | Chips, small controls |
-| `radius-md` | 8px | Buttons, inputs, list tiles |
-| `radius-lg` | 10px | Content cards, alerts, dropdowns |
-| `radius-xl` | 12px | Large inline media |
+| `radius-sm` | 6px | Chips, small controls |
+| `radius-md` | 10px | Buttons, inputs, list tiles |
+| `radius-lg` | 14px | Content cards, alerts, dropdowns |
+| `radius-xl` | 18px | Large panels / featured cards |
 | `radius-full` | 9999px | Status pills, avatars |
 
 Smaller than typical SaaS kits — intentional, timeless.
@@ -408,11 +408,11 @@ Smaller than typical SaaS kits — intentional, timeless.
 
 | Token | Value | Use |
 |-------|-------|-----|
-| `shadow-none` | none | Default resting UI |
-| `shadow-sm` | `0 1px 2px rgba(26,39,68,0.06)` | Optional card hover |
-| `shadow-md` | `0 8px 24px rgba(26,39,68,0.12)` | Dropdown, modal |
+| `shadow-sm` | soft azure shadow | Resting cards, controls, header |
+| `shadow-md` | medium lift | Card hover, form panels, dropdown |
+| `shadow-lg` | strong lift | Mobile nav panel, featured panels |
 
-No colored glows. Prefer Border over shadow.
+No colored glows / neon. Resting interactive cards: **border + shadow-sm**; hover: lift + **shadow-md**.
 
 ---
 
@@ -443,7 +443,7 @@ Mobile: single column. `sm+`: optional 2 columns.
 | Item | Spec |
 |------|------|
 | Header height | 64px |
-| Background | Surface · 1px bottom Border |
+| Background | Surface / 90% + backdrop blur · 1px bottom Border · shadow-sm |
 | Wordmark | Fraunces · Primary · church name |
 | Links | Navigation style · hover Primary · active weight 600 + `aria-current` |
 | CTA | One Primary button |
@@ -473,20 +473,22 @@ Breakpoints (Tailwind-aligned): `sm 640` · `md 768` · `lg 1024` · `xl 1280`
 
 ### 14.1 Philosophy
 
-Motion confirms place and hierarchy — **never entertainment**. Max **2–3** intentional motions on a visually led page.
+Motion confirms place and hierarchy — intentional, not entertainment. Home may use **2–4** coordinated motions (hero stagger, float orbs, scroll reveal, card lift).
 
 ### 14.2 Allowed
 
 | Type | Spec |
 |------|------|
-| **Hover** | Buttons/cards: ≤ **150ms** ease-out · color/border change |
-| **Fade** | Hero text or soft appear: **180–220ms** opacity |
+| **Hover** | Buttons/cards: ≤ **200ms** ease-out · lift + border + shadow |
+| **Hero stagger** | Fade-up **600ms** with short delays on title / body / CTAs |
+| **CSS 3D float** | Decorative orbs behind hero (pointer-events none) |
+| **Scroll reveal** | `.ui-reveal` via IntersectionObserver · one-shot |
 | **Slide** | Mobile nav panel: **200ms** short translateY/opacity |
-| **Page transition** | Prefer **none** (MPA). If added later: simple 150ms fade only — no shared-element theater |
+| **Page transition** | Prefer **none** (MPA) |
 
 ### 14.3 Forbidden
 
-Loops, parallax stacks, bounce, continuous ken-burns, scroll-hijack storytelling, glass shimmer.
+Parallax scroll-hijack, bounce, continuous ken-burns, glass shimmer, purple glow loops, WebGL/Three.js.
 
 ### 14.4 Reduced motion
 
@@ -536,41 +538,40 @@ Before shipping any page UI:
 
 ---
 
-## 18. Token mapping (for later implementation)
+## 18. Token mapping (implementation)
 
-Suggested CSS variables:
+Canonical source: [`resources/css/app.css`](../resources/css/app.css) `@theme` block.
 
 ```css
 @theme {
   --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, "Times New Roman", serif;
 
-  --color-primary: #1A2744;
-  --color-primary-dark: #121B30;
-  --color-primary-light: #E8ECF3;
-  --color-secondary: #5C6470;
-  --color-accent: #9A7B4F;
-  --color-background: #F3F1EC;
-  --color-surface: #FFFDF8;
-  --color-surface-alt: #E7E9E2;
-  --color-text: #1A2744;
-  --color-text-muted: #5C6470;
-  --color-border: #C9C4B8;
+  --color-primary: #0F274F;
+  --color-primary-dark: #0A1C3A;
+  --color-primary-light: #E4EBF5;
+  --color-secondary: #4A5568;
+  --color-accent: #C9892E;
+  --color-background: #EEF2F7;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #E2E8F0;
+  --color-muted: #5A6578;
+  --color-border: #C5CEDB;
   --color-success: #2F6A4A;
   --color-warning: #8A6A2F;
   --color-error: #8F2F2F;
-  --color-inverse: #141C2E;
-  --color-on-primary: #FFFDF8;
-  --color-accent-soft: #EDE4D4;
+  --color-inverse: #0A1628;
+  --color-on-primary: #FFFFFF;
+  --color-accent-soft: #F5E8D0;
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-  --radius-xl: 12px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
 }
 ```
 
-Filament panels (when themed): map `primary` to Primary `#1A2744` so staff tools feel related.
+Filament panels (when themed): map `primary` to Primary `#0F274F` so staff tools feel related.
 
 ---
 
@@ -579,8 +580,8 @@ Filament panels (when themed): map `primary` to Primary `#1A2744` so staff tools
 | Field | Value |
 |-------|--------|
 | File | `docs/DESIGN_SYSTEM.md` |
-| Direction | Open Door Light |
+| Direction | Open Door Alive (v2.1) |
 | Church | Hội Thánh Tin Lành Ân Điển / Grace Evangelical Church |
-| Implementation | **Live** — public UI + Filament primary aligned to Open Door Light |
+| Implementation | **Live** — public UI tokens + components |
 
-*This design system exists so every page feels like one church — one house of grace.*
+*This design system exists so every page feels like one church — one house of grace, alive with welcome.*

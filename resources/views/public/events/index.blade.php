@@ -3,31 +3,48 @@
 @section('title', 'Sự kiện')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-extrabold mb-10">Sự kiện</h1>
+<section class="ui-section">
+    <x-public.container>
+        <x-public.reveal>
+            <x-public.page-header title="Sự kiện" />
+        </x-public.reveal>
 
-    @if ($events->isEmpty())
-        <p class="text-slate-500">Hiện chưa có sự kiện nào.</p>
-    @else
-        <div class="grid md:grid-cols-3 gap-6">
-            @foreach ($events as $event)
-                <a href="{{ route('events.show', $event) }}" class="block border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
-                    <div class="text-indigo-600 text-sm font-semibold mb-1">
-                        {{ $event->start_date->format('d/m/Y H:i') }}
-                    </div>
-                    <div class="font-bold text-lg mb-2">{{ $event->name }}</div>
-                    <div class="text-sm text-slate-500 mb-3">{{ $event->location }}</div>
-                    <span class="inline-block text-xs font-semibold px-2 py-1 rounded-full
-                        {{ $event->status === 'open' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600' }}">
-                        {{ $event->status === 'open' ? 'Đang mở đăng ký' : 'Đã đóng đăng ký' }}
-                    </span>
-                </a>
-            @endforeach
-        </div>
+        @if ($events->isEmpty())
+            <x-public.reveal>
+                <x-public.empty-state
+                    title="Chưa có sự kiện nào"
+                    body="Hiện chưa có sự kiện công khai. Vui lòng quay lại sau."
+                    action-label="Về trang chủ"
+                    :action-url="route('home')"
+                />
+            </x-public.reveal>
+        @else
+            <ul class="grid list-none grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach ($events as $event)
+                    <li>
+                        <x-public.reveal :delay="(string) min(($loop->index % 3) + 1, 3)">
+                            <x-public.content-card
+                                :href="route('events.show', $event)"
+                                :title="$event->name"
+                                :meta="$event->start_date->format('d/m/Y H:i')"
+                                :description="$event->location"
+                            >
+                                <x-slot:status>
+                                    <x-public.status-chip
+                                        :tone="$event->status === 'open' ? 'success' : 'neutral'"
+                                        :label="$event->status === 'open' ? 'Đang mở đăng ký' : 'Đã đóng đăng ký'"
+                                    />
+                                </x-slot:status>
+                            </x-public.content-card>
+                        </x-public.reveal>
+                    </li>
+                @endforeach
+            </ul>
 
-        <div class="mt-10">
-            {{ $events->links() }}
-        </div>
-    @endif
-</div>
+            <div class="mt-10">
+                {{ $events->links() }}
+            </div>
+        @endif
+    </x-public.container>
+</section>
 @endsection
