@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicSiteController::class, 'home'])->name('home');
 Route::get('/about', [PublicSiteController::class, 'about'])->name('about');
+Route::get('/about/vision-mission', [PublicSiteController::class, 'aboutVision'])->name('about.vision');
+Route::get('/about/beliefs', [PublicSiteController::class, 'aboutBeliefs'])->name('about.beliefs');
+Route::get('/about/story', [PublicSiteController::class, 'aboutStory'])->name('about.story');
+Route::get('/about/team', [PublicSiteController::class, 'aboutTeam'])->name('about.team');
+Route::get('/about/promise', [PublicSiteController::class, 'aboutPromise'])->name('about.promise');
+Route::get('/about/friends', [PublicSiteController::class, 'aboutFriends'])->name('about.friends');
+Route::get('/about/friends/{friend}', [PublicSiteController::class, 'aboutFriend'])->name('about.friends.show');
 
 Route::get('/im-new', [PublicSiteController::class, 'imNewShow'])->name('im-new');
 Route::post('/im-new', [PublicSiteController::class, 'imNewStore'])->name('im-new.store');

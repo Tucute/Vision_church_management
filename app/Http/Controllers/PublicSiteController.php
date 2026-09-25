@@ -34,7 +34,70 @@ class PublicSiteController extends Controller
     {
         $churchInfo = ChurchInfo::current();
 
-        return view('public.about', compact('churchInfo'));
+        return view('public.about', [
+            'churchInfo' => $churchInfo,
+            'pastor' => config('about.pastor'),
+            'cards' => config('about.cards'),
+        ]);
+    }
+
+    public function aboutVision(): View
+    {
+        return view('public.about.vision', [
+            'churchInfo' => ChurchInfo::current(),
+        ]);
+    }
+
+    public function aboutBeliefs(): View
+    {
+        return view('public.about.beliefs', [
+            'churchInfo' => ChurchInfo::current(),
+            'beliefs' => config('about.beliefs'),
+        ]);
+    }
+
+    public function aboutStory(): View
+    {
+        return view('public.about.story', [
+            'churchInfo' => ChurchInfo::current(),
+        ]);
+    }
+
+    public function aboutTeam(): View
+    {
+        return view('public.about.team', [
+            'churchInfo' => ChurchInfo::current(),
+            'team' => config('about.team'),
+        ]);
+    }
+
+    public function aboutPromise(): View
+    {
+        return view('public.about.promise', [
+            'churchInfo' => ChurchInfo::current(),
+        ]);
+    }
+
+    public function aboutFriends(): View
+    {
+        return view('public.about.friends', [
+            'churchInfo' => ChurchInfo::current(),
+            'friends' => config('about.friends'),
+        ]);
+    }
+
+    public function aboutFriend(string $friend): View
+    {
+        $profile = collect(config('about.friends'))->firstWhere('slug', $friend);
+
+        if ($profile === null) {
+            abort(404);
+        }
+
+        return view('public.about.friend', [
+            'churchInfo' => ChurchInfo::current(),
+            'friend' => $profile,
+        ]);
     }
 
     public function imNewShow(): View
