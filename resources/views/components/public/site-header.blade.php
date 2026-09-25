@@ -24,19 +24,19 @@
     <x-public.container class="flex h-16 items-center justify-between gap-4">
         <x-public.logo :church-info="$churchInfo" />
 
-        <nav class="hidden items-center gap-6 lg:flex" aria-label="Điều hướng chính">
-            @foreach ($navItems as $item)
-                <x-public.nav-link
-                    :href="route($item['route'])"
-                    :label="$item['label']"
-                    :active="request()->routeIs($item['pattern'])"
-                />
-            @endforeach
-        </nav>
+        <div class="hidden items-center gap-6 lg:flex">
+            <nav class="flex items-center gap-6" aria-label="Điều hướng chính">
+                @foreach ($navItems as $item)
+                    <x-public.nav-link
+                        :href="route($item['route'])"
+                        :label="$item['label']"
+                        :active="request()->routeIs($item['pattern'])"
+                    />
+                @endforeach
+            </nav>
 
-        <div class="hidden lg:block">
-            <x-public.button variant="primary" :href="route('im-new')">
-                Kết nối ngay
+            <x-public.button variant="primary" href="{{ url('/admin/login') }}">
+                Đăng nhập
             </x-public.button>
         </div>
 
@@ -69,8 +69,8 @@
                     />
                 @endforeach
                 <div class="border-t border-border px-4 py-3">
-                    <x-public.button variant="primary" :href="route('im-new')" block>
-                        Kết nối ngay
+                    <x-public.button variant="primary" href="{{ url('/admin/login') }}" block>
+                        Đăng nhập
                     </x-public.button>
                 </div>
             </div>

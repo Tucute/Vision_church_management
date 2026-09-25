@@ -14,12 +14,12 @@
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_transparent_15%,_rgb(10_28_58_/_0.35)_100%)]"></div>
     </div>
 
-    <x-public.container width="reading" class="relative z-10 py-20 text-center sm:py-24 lg:py-32">
+    <x-public.container width="wide" class="relative z-10 py-20 text-center sm:py-24 lg:py-32">
         <p class="ui-hero-fade font-sans text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Chào mừng bạn
         </p>
 
-        <h1 id="home-hero-heading" class="ui-hero-fade-delay mt-4 font-display text-h1-mobile font-bold tracking-[-0.02em] text-on-primary sm:text-h1-tablet lg:text-h1">
+        <h1 id="home-hero-heading" class="ui-hero-title ui-hero-fade-delay mt-4 font-display font-bold tracking-[-0.03em] text-on-primary">
             {{ $churchInfo->name }}
         </h1>
 
@@ -39,9 +39,9 @@
                 <x-public.icon name="arrow-right" />
             </x-public.button>
             <x-public.button
-                variant="ghost"
+                variant="secondary"
                 :href="route('events.index')"
-                class="border-2 border-on-primary/70 bg-on-primary/10 text-on-primary shadow-sm hover:bg-on-primary/20 hover:text-on-primary"
+                class="border-transparent bg-accent-soft text-primary shadow-md hover:bg-on-primary"
             >
                 Xem sự kiện
             </x-public.button>

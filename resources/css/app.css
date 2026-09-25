@@ -95,6 +95,13 @@
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
         }
+
+        .ui-marquee-track {
+            animation-name: ui-marquee !important;
+            animation-duration: 36s !important;
+            animation-timing-function: linear !important;
+            animation-iteration-count: infinite !important;
+        }
     }
 }
 
@@ -232,6 +239,33 @@
             radial-gradient(circle at 80% 70%, rgb(15 39 79 / 0.12), transparent 40%);
     }
 
+    .ui-hero-title {
+        font-size: 2.75rem;
+        line-height: 1.15;
+    }
+
+    @media (min-width: 640px) {
+        .ui-hero-title {
+            font-size: 3rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ui-hero-title {
+            font-size: 3.25rem;
+            white-space: nowrap;
+        }
+    }
+
+    .ui-marquee-track {
+        animation: ui-marquee 36s linear infinite;
+    }
+
+    .ui-marquee:hover .ui-marquee-track,
+    .ui-marquee:focus-within .ui-marquee-track {
+        animation-play-state: paused;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .ui-hero-fade,
         .ui-hero-fade-delay,
@@ -272,6 +306,16 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes ui-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
     }
 }
 
